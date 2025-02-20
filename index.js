@@ -26,10 +26,17 @@ const data = [
 
 // Pagination function
 const paginate = (page = 1, pageSize = 5) => {
-  const startIndex = (page - 1) * pageSize;
-  const endIndex = page * pageSize;
-  return data.slice(startIndex, endIndex);
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    return data.slice(startIndex, endIndex);
 };
+
+// Disable CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
 // Route to get paginated data
 app.get('/paginated-data', (req, res) => {
